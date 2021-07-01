@@ -1,0 +1,56 @@
+.root {
+  -st-states: on, off, disabled;
+
+  --switchZoneWidth: 40px;
+  --switchControlDiameter: 18px;
+
+  --onBackgroundColor: cornflowerblue;
+  --offBackgroundColor: white;
+  --onSwitchColor: white;
+  --offSwitchColor: black;
+  --switchMargin: 1px;
+}
+
+.switcherWrapper {
+  display: flex;
+}
+
+.root:disabled::switcherWrapper {
+  opacity: 0.5;
+}
+
+.switcherZone {
+  display: flex;
+  align-items: center;
+  width: var(--switchZoneWidth);
+  height: var(--switchZoneWidth)/2;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.root:on::switcherZone {
+  justify-content: flex-end;
+  background-color: var(--onBackgroundColor);
+}
+
+.root:off::switcherZone {
+  justify-content: flex-start;
+  background-color: var(--offBackgroundColor);
+}
+
+.switchControl {
+  width: var(--switchControlDiameter);
+  height: var(--switchControlDiameter);
+  border-radius: 10px;
+  margin-left: var(--switchMargin);
+  margin-right: var(--switchMargin);
+}
+
+.root:on::switchControl {
+  background-color: var(--onSwitchColor);
+}
+
+.root:off::switchControl {
+  background-color: var(--offSwitchColor);
+}
