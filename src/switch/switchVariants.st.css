@@ -1,0 +1,36 @@
+@st-import Switch from './switch.st.css';
+
+/* Small switch variant */
+.smallSwitch {
+    --smallKnobDiameter: 13px;
+    --smallTrackWidth: 30px;
+
+    -st-extends: Switch;
+    font-size: 0.8rem;
+}
+
+.smallSwitch::track {
+    width: var(--smallTrackWidth);
+    height: calc(var(--smallTrackWidth) / 2);
+}
+
+.smallSwitch::knob {
+    width: var(--smallKnobDiameter);
+    height: var(--smallKnobDiameter)
+}
+
+/* Danger switch variant */
+.dangerSwitch {
+    --onDangerColor: crimson;
+    --offdDangerColor: orange;
+
+    -st-extends: Switch;
+}
+
+.dangerSwitch:on::track {
+    background-color: var(--onDangerColor);
+}
+
+.dangerSwitch:off::track {
+    background-color: var(--offdDangerColor);
+}

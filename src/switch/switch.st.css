@@ -1,8 +1,8 @@
 .root {
   -st-states: on, off, disabled;
 
-  --switchZoneWidth: 40px;
-  --switchControlDiameter: 18px;
+  --trackWidth: 40px;
+  --knobDiameter: 18px;
 
   --onBackgroundColor: cornflowerblue;
   --offBackgroundColor: white;
@@ -11,46 +11,46 @@
   --switchMargin: 1px;
 }
 
-.switcherWrapper {
+.switchWrapper {
   display: flex;
 }
 
-.root:disabled::switcherWrapper {
+.root:disabled::switchWrapper {
   opacity: 0.5;
 }
 
-.switcherZone {
+.track {
   display: flex;
   align-items: center;
-  width: var(--switchZoneWidth);
-  height: var(--switchZoneWidth)/2;
+  width: var(--trackWidth);
+  height: calc(var(--trackWidth) /2);
   border: 1px solid black;
   border-radius: 10px;
   margin-right: 5px;
 }
 
-.root:on::switcherZone {
+.root:on::track {
   justify-content: flex-end;
   background-color: var(--onBackgroundColor);
 }
 
-.root:off::switcherZone {
+.root:off::track {
   justify-content: flex-start;
   background-color: var(--offBackgroundColor);
 }
 
-.switchControl {
-  width: var(--switchControlDiameter);
-  height: var(--switchControlDiameter);
+.knob {
+  width: var(--knobDiameter);
+  height: var(--knobDiameter);
   border-radius: 10px;
   margin-left: var(--switchMargin);
   margin-right: var(--switchMargin);
 }
 
-.root:on::switchControl {
+.root:on::knob {
   background-color: var(--onSwitchColor);
 }
 
-.root:off::switchControl {
+.root:off::knob {
   background-color: var(--offSwitchColor);
 }

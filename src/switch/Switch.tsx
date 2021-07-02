@@ -1,50 +1,63 @@
-import React from "react";
-import { style, classes, cssStates } from "./switch.st.css";
+import React, { useState } from "react";
+import { style, classes } from "./switch.st.css";
 
-type SwitchProps = {
-  checked: boolean;
+export type SwitchProps = {
+  checked?: boolean;
+  defaultChecked?: boolean;
   disabled?: boolean;
   label: JSX.Element | string;
-  offLabel?: string;
-  onLabel?: string;
+  labelOff?: string;
+  labelOn?: string;
   onChange(newChecked: boolean): void;
   className?: string;
 };
 
-export const Switcher: React.FC<SwitchProps> = ({
+export const Switch: React.FC<SwitchProps> = ({
   checked,
+  defaultChecked = true,
   disabled = false,
   label,
-  offLabel = "off",
+  labelOff = "off",
   onChange,
-  onLabel = "on",
+  labelOn = "on",
   className,
 }) => {
+  const [checkedInner, setCheckedInner] = useState(defaultChecked);
+
+  const isSwitchControlled = typeof checked === "boolean";
+  const effectiveChecked = isSwitchControlled ? checked : checkedInner;
+
   return (
     <div
       className={style(
         classes.root,
         {
           disabled,
-          on: checked,
-          off: !checked,
+          on: effectiveChecked,
+          off: !effectiveChecked,
         },
         className
       )}
     >
       <label>{label}</label>
-      <div className={style(classes.switcherWrapper)}>
+      <div className={style(classes.switchWrapper)}>
         <div
-          className={style(classes.switcherZone)}
+          className={style(classes.track)}
           onClick={() => {
-            if (!disabled) {
-              onChange(!checked);
+            if (disabled) {
+              return;
             }
+
+            if (!isSwitchControlled) {
+              setCheckedInner((prevInnerChecked) => !prevInnerChecked);
+            }
+
+            onChange(!effectiveChecked);
           }}
         >
-          <div className={style(classes.switchControl)}></div>
+          <div className={style(classes.knob)}></div>
         </div>
-        <div>{checked ? onLabel : offLabel}</div>
+        <div>{effectiveChecked ? labelOn : labelOff}</div>
       </div>
     </div>
   );
