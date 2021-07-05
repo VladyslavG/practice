@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { style, classes } from "./switch.st.css";
 
+/**
+ * 
+<Switch checked/>                          controlled switch checked, not changing
+<Switch checked={true} />                  controlled switch checked, not changing
+<Switch checked={false} />                 controlled switch unchecked, not changing
+<Switch />                                 uncontrolled switch unchecked, changing
+<Switch defaultChecked />                  uncontrolled switch checked, changing
+<Switch defaultChecked={true} />           uncontrolled switch checked, changing
+<Switch defaultChecked={false} />.         uncontrolled switch unchecked, changing
+
+<Switch defaultChecked checked />.         Error
+ */
 export type SwitchProps = {
   checked?: boolean;
   defaultChecked?: boolean;
@@ -8,13 +20,13 @@ export type SwitchProps = {
   label: JSX.Element | string;
   labelOff?: string;
   labelOn?: string;
-  onChange(newChecked: boolean): void;
+  onChange?(newChecked: boolean): void;
   className?: string;
 };
 
 export const Switch: React.FC<SwitchProps> = ({
   checked,
-  defaultChecked = true,
+  defaultChecked = false,
   disabled = false,
   label,
   labelOff = "off",
@@ -52,7 +64,7 @@ export const Switch: React.FC<SwitchProps> = ({
               setCheckedInner((prevInnerChecked) => !prevInnerChecked);
             }
 
-            onChange(!effectiveChecked);
+            onChange?.(!effectiveChecked);
           }}
         >
           <div className={style(classes.knob)}></div>

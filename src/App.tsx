@@ -17,12 +17,16 @@ export const App: React.FC = () => {
         onChange={setChecked1}
         label="Engine working"
       />
+      <h3>controlled witthout changing values</h3>
+      <Switch checked label="Engine working (no ability to change)" />
       <h3>Uncontrolled</h3>
       <Switch
         defaultChecked
         onChange={(newVal) => console.log(newVal)}
         label="Engine working uncontrolled"
       />
+      <h3>Uncontrolled with no initial value</h3>
+      <Switch label="Engine working uncontrolled" />
       <h3>small</h3>
       <Switch
         checked={checked2}

@@ -4,16 +4,12 @@ import { classes, st } from "../../../src/switch/switchVariants.st.css";
 import { FC, useState } from "react";
 
 export default createSimulation({
-  name: "Switch Uncontrolled",
-  componentType: Switch,
-  props: {
-    label: "test",
-    defaultChecked: true,
-    onChange(newVal) {
-      console.info(newVal);
+    name: "Switch Uncontrolled With No Initial value",
+    componentType: Switch,
+    props: {
+        label: "Switch",
     },
-  },
-  environmentProps: {
-    windowWidth: 436,
-  },
+    environmentProps: {
+        windowWidth: 436,
+    },
 });
